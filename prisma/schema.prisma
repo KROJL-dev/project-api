@@ -29,6 +29,30 @@ model User {
  
 
   @@map("users")
+  Application Application[]
+}
+
+model Application {
+  id          String   @id @default(uuid())
+  company     String
+  position    String
+  status      ApplicationStatus @default(APPLIED)
+  link        String?           // ссылка на вакансию
+  notes       String?           // дополнительные заметки
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+ 
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+enum ApplicationStatus {
+  APPLIED
+  INTERVIEW
+  OFFER
+  REJECTED
+  ACCEPTED
 }
 
  

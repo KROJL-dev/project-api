@@ -12,12 +12,12 @@ import { JwtAtStrategy, JwtRtStrategy, LocalStrategy } from './strategy'
 @Module({
   imports: [
     ConfigModule,
-    forwardRef(() => UserModule), // 👈 если потенциально есть циклическая зависимость
+    forwardRef(() => UserModule),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: {
-        expiresIn: '1d',
+        expiresIn: '1h',
         algorithm: 'HS384',
       },
       verifyOptions: {
@@ -27,6 +27,5 @@ import { JwtAtStrategy, JwtRtStrategy, LocalStrategy } from './strategy'
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtRtStrategy, JwtAtStrategy, LocalStrategy],
-  // ❌ exports: [UserModule], — убрать
 })
 export class AuthModule {}

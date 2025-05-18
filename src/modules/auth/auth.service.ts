@@ -11,9 +11,8 @@ import { ConfigService } from '@nestjs/config'
 import { PrismaService } from 'src/prisma/prisma.service'
 
 import * as bcrypt from 'bcrypt'
-import { Tokens } from './types/Tokens'
-
 import { AccessToken } from './types/AccessToken'
+
 import { UserService } from 'src/modules/user/user.service'
 import { RegisterRequestDto } from './dtos/register-request.dto'
 
@@ -69,15 +68,14 @@ export class AuthService {
   }
 
   async login(user: Pick<User, 'email' | 'password'>): Promise<AccessToken> {
-    const { email, password } = user
+    const { email } = user
 
     const existingUser = await this.usersService.findOne(email)
     if (!existingUser) {
       throw new UnauthorizedException('incorrect email')
     }
-    console.log('existingUser', existingUser)
-    // return { access_token: '', refresh_token: '' }
-    return this.signToken(existingUser?.id, password)
+
+    return this.signToken(existingUser?.id, email)
   }
 
   async register(user: RegisterRequestDto): Promise<AccessToken> {
@@ -99,16 +97,16 @@ export class AuthService {
     return this.login(newUser)
   }
 
-  async signToken(userId: number, email: string): Promise<Tokens> {
+  async signToken(userId: number, email: string): Promise<AccessToken> {
     const payLoad = {
-      sub: userId,
+      id: userId,
       email,
     }
     const at_secret = this.configService.get<string>('JWT_AT_SECRET')
     const rt_secret = this.configService.get<string>('JWT_RT_SECRET')
 
     const at_token = await this.jwtService.signAsync(payLoad, {
-      expiresIn: '15min',
+      expiresIn: '1d',
       secret: at_secret,
     })
 
@@ -118,8 +116,8 @@ export class AuthService {
     })
 
     return {
-      access_token: at_token,
-      refresh_token: rt_token,
+      accessToken: at_token,
+      refreshToken: rt_token,
     }
   }
 }

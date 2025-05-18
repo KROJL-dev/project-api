@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common'
 import { isArray } from 'class-validator'
 
-export const GetUser = createParamDecorator((data, ctx: ExecutionContext) => {
+export const JWTUser = createParamDecorator((data, ctx: ExecutionContext) => {
   const req = ctx.switchToHttp().getRequest()
   const user = req.user
 
