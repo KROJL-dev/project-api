@@ -15,7 +15,6 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req): Promise<LoginResponseDTO | BadRequestException> {
-    console.log('req', req.body)
     return this.authService.login(req.body)
   }
 
