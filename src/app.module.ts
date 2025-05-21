@@ -14,6 +14,7 @@ import { ApplicationModule } from './modules/application/application.module'
   imports: [
     ConfigModule.forRoot({
       envFilePath: ['.env'],
+      isGlobal: true,
     }),
     PrismaModule,
     UserModule,
