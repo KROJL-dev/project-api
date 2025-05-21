@@ -13,6 +13,7 @@ COPY . .
 ENV NODE_ENV=production
  
 RUN npx prisma generate
+RUN npx prisma db push
 
  
 RUN npm run build
