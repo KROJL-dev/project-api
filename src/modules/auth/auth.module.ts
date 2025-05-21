@@ -23,6 +23,7 @@ import { JwtAtStrategy, JwtRtStrategy, LocalStrategy } from './strategy'
         verifyOptions: {
           algorithms: ['HS384'],
         },
+        secret: process.env.JWT_SECRET,
         ...config,
       }),
     }),
