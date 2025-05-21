@@ -11,7 +11,7 @@ import { RemoveUndefinedPipe } from 'src/common/pipes/RemoveUndefined'
 export class ApplicationController {
   constructor(private readonly applicationService: ApplicationService) {}
 
-  @Get('/statuses')
+  @Get('statuses')
   getAllStatuses() {
     return this.applicationService.getAllStatuses()
   }
@@ -26,7 +26,7 @@ export class ApplicationController {
     return this.applicationService.create({ ...application, userId: user.id })
   }
 
-  @Patch('/:applicationId')
+  @Patch(':applicationId')
   updateApplicationOrder(
     @Body(new RemoveUndefinedPipe()) data: UpdateApplication,
     @Param('applicationId') id: string
