@@ -13,9 +13,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // удалит лишние поля
-      forbidNonWhitelisted: true, // выбросит ошибку при лишних полях
-      transform: true, // преобразует plain объекты в DTO-классы
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
     })
   )
 
