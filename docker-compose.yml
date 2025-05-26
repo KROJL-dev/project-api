@@ -44,13 +44,6 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    entrypoint: >
-      sh -c "certbot certonly --webroot 
-             --webroot-path=/var/www/certbot 
-             --email dddddden.ddd@gmail.com 
-             --agree-tos 
-             --no-eff-email 
-             -d api.cloud.jobstracker.net"
 
 volumes:
   pgdata:
