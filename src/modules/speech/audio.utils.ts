@@ -49,10 +49,10 @@ export async function sendToSageMaker(wavPath: string): Promise<string> {
     body: bodyBuffer,
   }
 
-  aws4.sign(requestOptions, {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  })
+  // aws4.sign(requestOptions, {
+  //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  // })
 
   try {
     const start = Date.now()
