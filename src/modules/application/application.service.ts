@@ -9,7 +9,12 @@ export class ApplicationService {
   constructor(private prismaService: PrismaService) {}
 
   findAll(userId: number) {
-    return this.prismaService.application.findMany({ where: { userId: Number(userId) } })
+    return this.prismaService.application.findMany({
+      where: { userId: Number(userId) },
+      include: {
+        meeting: true,
+      },
+    })
   }
 
   getAllStatuses() {
