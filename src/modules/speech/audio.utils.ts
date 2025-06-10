@@ -68,7 +68,7 @@ export async function sendToSageMaker(wavPath: string): Promise<string> {
   } catch (error) {
     console.error('Error sending request to SageMaker:', error)
     if (axios.isAxiosError(error)) {
-      console.error('Response:', error.response?.data)
+      console.error('Response: ', error.response?.data)
     }
     throw error
   }
